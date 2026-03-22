@@ -1,0 +1,6 @@
+# Create .gitignore
+node_modules
+.next
+.env*.local
+.vercel
+*.log

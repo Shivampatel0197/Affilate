@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 255 255 255;
+  --foreground: 29 29 31;
+  --accent: 0 113 227;
+  --accent-foreground: 255 255 255;
+  --secondary: 245 245 247;
+  --border: 210 210 215;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 0 0 0;
+    --foreground: 245 245 247;
+    --accent: 41 151 255;
+    --accent-foreground: 255 255 255;
+    --secondary: 29 29 31;
+    --border: 66 66 69;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.premium-gradient {
+  background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+}
+
+.dark .premium-gradient {
+  background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%);
+}
+
+.btn-premium {
+  @apply px-6 py-3 rounded-full font-semibold transition-all duration-300 active:scale-95;
+}
+
+.btn-primary {
+  @apply btn-premium bg-accent text-accent-foreground hover:bg-opacity-90 shadow-lg shadow-accent/20;
+}
+
+.btn-secondary {
+  @apply btn-premium bg-secondary text-foreground hover:bg-opacity-80;
+}
