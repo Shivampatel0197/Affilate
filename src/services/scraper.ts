@@ -1,4 +1,5 @@
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 
 export interface ScrapedProduct {
   title: string;
@@ -13,9 +14,15 @@ export interface ScrapedProduct {
 }
 
 export async function scrapeProduct(url: string): Promise<ScrapedProduct> {
+  const isLocal = process.env.NODE_ENV === "development";
+  
   const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: isLocal ? [] : chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: isLocal 
+      ? "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" // Local Chrome path
+      : await chromium.executablePath(),
+    headless: isLocal ? true : chromium.headless,
   });
 
   try {
